@@ -11,6 +11,35 @@ let canvasElem = document.getElementById('chart')
  *
  */
 function renderChart() {
+  let appState = new AppState();
+  
+  appState.loadItems();
+  
+  let data = {
+    labels: appState.allProducts.map(product => product.name),
+    datasets: [{
+      label: '# of Votes',
+      data: appState.allProducts.map(product => product.timesClicked),
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  let config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+  
+  new Chart(canvasElem, config);
 }
+
 
 renderChart();

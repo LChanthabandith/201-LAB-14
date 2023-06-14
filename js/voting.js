@@ -41,13 +41,15 @@ function handleImageClick(event) {
     if (imageClicked === state.allProducts[i].name) {
       state.allProducts[i].timesClicked++;
       votingRounds--;
-      renderProductImages();
+      break;
     }
+  }
 
-    if (votingRounds === 0) {
-      imgContainer.removeEventListener('click', handleImageClick);
-      state.saveToLocalStorage();
-    }
+  if (votingRounds > 0) {
+    renderProductImages();
+  } else {
+    imgContainer.removeEventListener('click', handleImageClick);
+    state.saveToLocalStorage();
   }
 }
 
